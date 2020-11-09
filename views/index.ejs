@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todolist</title>
+    <style>
+        body {
+            background-image: url("https://image.freepik.com/free-photo/desk-office-top-view-with-computer-notepad-pen-coffee-plant-black-background_149391-114.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .todo {
+            width: 60%;
+            margin-left: 20%;
+            background: #111845a6;
+            margin-top: 5%;
+            box-sizing: border-box;
+            box-shadow: 0 20px 50px rgb(23, 32, 90);
+            border: 2px solid #2a3cad;
+            color: white;
+            padding: 20px;
+
+        }
+
+        .todo:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: 0.5s;
+            pointer-events: none;
+        }
+
+        .todo .box1 {
+            border: 1px solid #f0a591;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(9, 0, 0, 0.5);
+
+        }
+
+        .todo:hover:before {
+            left: -50%;
+            transform: skewX(-5deg);
+        }
+
+        @keyframes animated-border {
+            0% {
+                box-shadow: 0 0 0 0 rgb(23, 32, 90, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+            }
+        }
+
+        .input {
+            animation: animated-border 1.5s infinite;
+            color: white;
+            border: 0;
+            background: none;
+            display: block;
+            margin-left: 15%;
+            margin-top: 5%;
+            border: 3px solid rgb(11, 173, 236);
+            padding: 10px 10px;
+            width: 250px;
+            font-size: 18px;
+            outline: none;
+            color: white;
+            border-radius: 5px;
+            transition: 0.25s
+        }
+
+        .input:focus {
+            width: 300px;
+            border-color: #f0a591;
+        }
+
+        .button {
+            border: 0;
+            background: none;
+            display: block;
+            margin-left: 64%;
+            margin-top: -7%;
+            text-align: center;
+            border: 3px solid #f00cab;
+            padding: 10px 10px;
+            outline: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: 0.25s;
+            cursor: pointer
+        }
+
+        .button:hover {
+            background: #f00cab;
+
+        }
+
+        h1 {
+            color: pink;
+            text-align: center;
+        }
+        table{
+            width: 60%;
+            margin-left: 10%;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .listname{
+            color: tomato; 
+        }
+        .del{
+            border: 0;
+            background: none ;
+            display: block;
+            /* margin: 4px auto; */
+            margin-left: 50%;
+            text-align: center;
+            border: 2px solid rgb(255, 0, 76);
+            padding: 8px 10px;
+            outline: none;
+            color: white;
+            font-size: 15px;
+            border-radius: 5px;
+            transition: 0.25s;
+            cursor: pointer
+        }
+        .del:hover{
+            background-color: rgb(255, 0, 76) ;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="todo">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <div class="box1">
+            <h1>My Todo List</h1>
+            <form action="/post" method="POST">
+                <div class="content">
+                    <input type="text" class="input" name="list">
+                    <button class="button" type="submit">Add</button>
+                </div>
+
+            </form>
+            <br>
+            <br>
+            <div>
+                <table>
+                    <tbody>
+                        <% for (i=0; i < data.length; i++) {%>
+                        <tr>
+                            <td class="listname"><%=data[i].list%></td>
+                            <td>
+                                <form action="/delete" method="post">
+                                    <input type="hidden" value="<%=i%>" name="id">
+                                    <button type="submit" class="del">Delete</button>                                
+                                </form>
+                            </td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+           
+        </div>
+
+    </div>
+      
+   
+</body>
+</html>
